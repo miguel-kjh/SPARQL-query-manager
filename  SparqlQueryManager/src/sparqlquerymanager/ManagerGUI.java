@@ -2,11 +2,16 @@ package sparqlquerymanager;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class ManagerGUI extends javax.swing.JFrame {
 
+    private QueryExecutor queryExecutor = new QueryExecutor();
+    
     public ManagerGUI() {
         initComponents();
         setTitle("SPARQL Query Manager");
@@ -121,11 +126,11 @@ public class ManagerGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(exeButton)
                 .addGap(18, 18, 18)
-                .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +169,7 @@ public class ManagerGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 89, Short.MAX_VALUE)))
+                        .addGap(0, 237, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -172,11 +177,41 @@ public class ManagerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exeButtonActionPerformed
-        // TODO add your handling code here:
+        if (buttonGroup.getSelection() == radioButtonLocal.getModel()) {
+            if(!isValidFile(fileOrUrlField.getText())){
+                printErrorMessage(fileOrUrlField.getText() + " is not a File",
+                        "Error - Bad File");
+                return;
+            }
+            String result = queryExecutor.queryInLocalFile(
+                    fileOrUrlField.getText(),
+                    queryArea.getText()
+            );
+            setResultText(result);
+            return;
+        }
+        
+        if (buttonGroup.getSelection() == radioButtonEndpoint.getModel()) {
+            if(!isValidUrl(fileOrUrlField.getText())){
+                printErrorMessage(fileOrUrlField.getText() + " is not a URL",
+                        "Error - Bad url");
+                return;
+            }
+            String result = queryExecutor.queryInEndpoint(
+                    fileOrUrlField.getText(), 
+                    queryArea.getText()
+            );
+            setResultText(result);
+            return;
+        }
+        
+        printErrorMessage("Yo did not selected a file or a url option",
+                "Error - options ignore");
     }//GEN-LAST:event_exeButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        // TODO add your handling code here:
+        resultArea.setText("");
+        queryArea.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     public static void main(String args[]){
@@ -212,4 +247,28 @@ public class ManagerGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioButtonLocal;
     private javax.swing.JTextArea resultArea;
     // End of variables declaration//GEN-END:variables
+    
+    private void printErrorMessage(String message, String typeError) {
+        JOptionPane.showMessageDialog(this,
+                    message, 
+                    typeError, JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void setResultText(String result) {
+        resultArea.setText(result);
+    }
+
+    private boolean isValidUrl(String url) { 
+        try { 
+            new URL(url).toURI(); 
+            return true; 
+        }catch (Exception e) { 
+            return false; 
+        } 
+    }
+
+    private boolean isValidFile(String text) {
+        return new File(text).exists();
+    }
+
 }

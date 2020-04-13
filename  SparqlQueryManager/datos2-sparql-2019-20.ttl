@@ -1,0 +1,45 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX eg: <http://www.si2.com/si2/>
+
+eg:episodios_nacionales
+	rdf:type dc:Collection.
+	
+eg:libro101
+	dc:title "La hojarasca";
+	dc:creator "Gabriel García Márquez" .
+
+eg:libro201
+	dc:title "El amor en los tiempos del cólera";
+	dc:creator "Gabriel García Márquez" .
+	
+eg:libro301
+	dc:title "Trafalgar";
+	dc:creator "Benito Pérez Galdós";
+	dc:isPartOf eg:episodios_nacionales.
+
+eg:libro401
+	dc:title "Bailén";
+	dc:creator "Benito Pérez Galdós";
+	dc:isPartOf eg:episodios_nacionales.
+	
+eg:libro501
+	dc:title "La Corte de Carlos IV";
+	dc:creator "Benito Pérez Galdós";
+	dc:isPartOf eg:episodios_nacionales.
+	
+eg:libro601
+	dc:title " El 19 de marzo y el 2 de mayo";
+	dc:creator "Benito Pérez Galdós";
+	dc:isPartOf eg:episodios_nacionales.
+
+eg:libro701
+	dc:title "Napoleón en Chamartín";
+	dc:creator "Benito Pérez Galdós";
+	dc:isPartOf eg:episodios_nacionales.
+
+eg:libro801
+	dc:title "Zaragoza";
+	dc:creator "Benito Pérez Galdós";
+	dc:isPartOf eg:episodios_nacionales.
+

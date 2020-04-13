@@ -1,0 +1,67 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX eg: <http://www.si2.com/si2/>
+
+eg:crepusculo
+	rdf:type dc:Collection.
+	
+eg:harry_potter
+	rdf:type dc:Collection.
+	
+eg:libro1
+	dc:title "Cien años de soledad";
+	dc:creator "Gabriel García Márquez" .
+
+eg:libro2
+	dc:title "Crepúsculo";
+	dc:creator "Stephanie Meyer";
+	dc:isPartOf eg:crepusculo.
+	
+eg:libro3
+	dc:title "Harry Potter y la piedra filosofal";
+	dc:creator "J. K. Rowling";
+	dc:isPartOf eg:harry_potter.
+
+eg:libro4
+	dc:title "Harry Potter y la cámara secreta";
+	dc:creator "J. K. Rowling";
+	dc:isPartOf eg:harry_potter.
+	
+eg:libro5
+	dc:title "Luna Nueva";
+	dc:creator "Stephanie Meyer";
+	dc:isPartOf eg:crepusculo.
+	
+eg:libro6
+	dc:title " Eclipse";
+	dc:creator "Stephanie Meyer";
+	dc:isPartOf eg:crepusculo.
+
+eg:libro7
+	dc:title "Amanecer";
+	dc:creator "Stephanie Meyer";
+	dc:isPartOf eg:crepusculo.
+
+eg:libro8
+	dc:title "Harry Potter y el prisionero de Azkaban";
+	dc:creator "J. K. Rowling";
+	dc:isPartOf eg:harry_potter.
+
+eg:libro9
+	dc:title " Harry Potter y el cáliz de fuego";
+	dc:creator "J. K. Rowling";
+	dc:isPartOf eg:harry_potter.
+
+eg:libro10
+	dc:title "Harry Potter y la Orden del Fénix";
+	dc:creator "J. K. Rowling";
+	dc:isPartOf eg:harry_potter.
+
+eg:libro11
+	dc:title "El otoño del patriarca";
+	dc:creator "Gabriel García Márquez" .
+
+eg:libro12
+	dc:title "El coronel no tiene quien le escriba";
+	dc:creator "Gabriel García Márquez" .	
+	
