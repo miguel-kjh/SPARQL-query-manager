@@ -1,7 +1,6 @@
 package sparqlquerymanager;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import org.apache.jena.atlas.logging.LogCtl;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;

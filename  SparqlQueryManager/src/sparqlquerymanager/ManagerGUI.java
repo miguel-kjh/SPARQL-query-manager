@@ -3,7 +3,6 @@ package sparqlquerymanager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,7 +14,7 @@ public class ManagerGUI extends javax.swing.JFrame {
     public ManagerGUI() {
         initComponents();
         setTitle("SPARQL Query Manager");
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
         buttonGroup.add(radioButtonLocal);
         buttonGroup.add(radioButtonEndpoint);
@@ -126,11 +125,11 @@ public class ManagerGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(exeButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(46, 46, 46))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,13 +147,13 @@ public class ManagerGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -169,7 +168,7 @@ public class ManagerGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 237, Short.MAX_VALUE)))
+                        .addGap(0, 279, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -197,10 +196,15 @@ public class ManagerGUI extends javax.swing.JFrame {
                         "Error - Bad url");
                 return;
             }
-            String result = queryExecutor.queryInEndpoint(
+            String result = "";
+            try {
+                result = queryExecutor.queryInEndpoint(
                     fileOrUrlField.getText(), 
                     queryArea.getText()
-            );
+                );
+            } catch (Exception e) {
+                printErrorMessage("Bad request, the internet have problems or the url are bad", "Error - Http");
+            }
             setResultText(result);
             return;
         }
