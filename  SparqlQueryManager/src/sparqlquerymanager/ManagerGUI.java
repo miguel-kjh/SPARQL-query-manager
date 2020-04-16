@@ -209,13 +209,12 @@ public class ManagerGUI extends javax.swing.JFrame {
             return;
         }
         
-        printErrorMessage("Yo did not selected a file or a url option",
+        printErrorMessage("You did not selected a file or a url option",
                 "Error - options ignore");
     }//GEN-LAST:event_exeButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         resultArea.setText("");
-        queryArea.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     public static void main(String args[]){
